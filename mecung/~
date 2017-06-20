@@ -1,0 +1,41 @@
+#include <iostream.h>
+#include <stdlib.h>
+#include <time.h>
+const int max=20;
+void SinhMTK(int a[max][max], int &n){
+	srand( time(NULL) );
+	n=rand()*3/RAND_MAX+3;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){	
+			if(i==j) a[i][i]=0;		
+			else a[i][j]=(rand()*1.0/RAND_MAX)> 0.3 ? 0 : 1;			
+		}   
+		   
+	}
+}
+void InMTK(int a[max][max], int n){
+	cout<<"\n*Ma tran ke:"<<endl;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			cout<<a[i][j]<<" ";
+		}
+      		cout<<endl;
+	}
+}
+void TinhBanBac(int a[max][max], int n) {
+	cout<<"\n*Tinh ban bac vao, ra:"<<endl;
+  	for (int i = 1; i <= n; i++) {
+		int vao = 0, ra = 0;
+		for (int j = 1; j <= n; j++) {
+			 vao += a[j][i];
+			 ra += a[i][j];
+		}
+		cout<<"Dinh "<<i<<" co ban bac vao = "<<vao<<"; ban bac ra = "<<ra<<endl;
+  	}
+}
+int main(){
+	int a[max][max];	int n;
+	SinhMTK(a,n); 	InMTK(a,n);
+	TinhBanBac(a,n);
+}
+

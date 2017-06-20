@@ -1,0 +1,43 @@
+#include<stdio.h>
+const int max=20;
+char* tenfile1="d:/dt1.txt";
+char* tenfile2="d:/dt2.txt";
+int x[max], n, chon[max], a[max][max],b[max][max];
+void docfile(char* tenfile, int a[max][max],int &n){
+	FILE* f=fopen (tenfile,"r");
+	fscanf (f,"%d",&n);
+	for(int i=1;i<=n;i++)
+		for(int j=1;j<=n;j++)
+			fscanf(f,"%d",&a[i][j]);
+	fclose(f);	
+}
+int kt(){
+	for(int i=1;i<=n;i++)
+		for(int j=1;j<=n;j++)
+			if(a[i][j]!=b[x[i]][j]) return 0;
+	return 1;
+}
+void inHV(){
+	for(int i=1;i<=n;i++)
+		printf("%2d",x[i]);
+	printf ("\n");
+}
+void Try(int i){
+	for(int j=1;j<=n;j++){
+		if(chon[j]==0){
+			x[i]=j; chon[j]=1;
+			if(i==n){
+				if(kt()==1)inHV();
+			}
+			else Try(i+1);
+			chon[j]=0;
+		} 		
+	}
+}
+int main(){
+	docfile(tenfile1,a,n);
+	docfile(tenfile2,b,n);
+	for(int i=1;i<=n;i++)
+		chon[i]=0;
+	Try(1);
+}
